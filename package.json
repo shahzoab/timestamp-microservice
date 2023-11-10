@@ -1,0 +1,20 @@
+{
+  "name": "timestamp-microservice",
+  "version": "0.0.1",
+  "description": "An FCC Backend Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.12.4"
+  },
+  "author": "Shahzoab Khan <shahzoab@gmail.com>",
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "license": "MIT"
+}
