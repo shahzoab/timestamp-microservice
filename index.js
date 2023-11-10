@@ -16,13 +16,23 @@ app.get("/", function (_req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+// API endpoint for empty date
+app.get("/api/", function (_req, res) {
+  const date = new Date();
+  res.json({ unix: date.getTime(), utc: date.toUTCString() });
+});
+
 // API endpoint for date
 app.get("/api/:date", function (req, res) {
   const dateParam = req.params.date;
-  const hasDash = dateParam.includes("-");
-  const date = new Date(hasDash ? dateParam : parseInt(dateParam));
-  const unix = hasDash ? date.getTime() : dateParam;
-  res.json({ unix: unix, utc: date.toUTCString() });
+  const isUnix = !isNaN(dateParam);
+  const date = new Date(isUnix ? parseInt(dateParam) : dateParam);
+  const unix = isUnix ? parseInt(dateParam) : date.getTime();
+  if (date.toString() === "Invalid Date") {
+    res.json({ error: "Invalid Date" });
+  } else {
+    res.json({ unix, utc: date.toUTCString() });
+  }
 });
 
 // listen for requests
